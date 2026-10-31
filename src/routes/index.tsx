@@ -129,7 +129,7 @@ function Home() {
                     <Link to="/category/$slug" params={{ slug: c.slug }} className="text-xs font-bold uppercase tracking-wider text-spark hover:underline">View all →</Link>
                   </div>
                   <div className="grid gap-6 md:grid-cols-2">
-                    <ArticleCard a={items[0]} />
+                    <ArticleCard a={items[0]!} />
                     <div className="space-y-5">{items.slice(1).map((a) => <ArticleCard key={a.id} a={a} variant="compact" />)}</div>
                   </div>
                   {idx === 3 && <AdSlot size="banner" />}

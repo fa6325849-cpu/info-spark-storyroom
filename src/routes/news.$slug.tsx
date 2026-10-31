@@ -90,8 +90,8 @@ function textOf(children: ReactNode): string {
 const mdComponents = {
   h2: ({ children }: { children?: ReactNode }) => <h2 id={headingId(textOf(children))}>{children}</h2>,
   h3: ({ children }: { children?: ReactNode }) => <h3 id={headingId(textOf(children))}>{children}</h3>,
-  img: (p: { src?: string; alt?: string }) => <img src={p.src} alt={p.alt ?? ""} loading="lazy" />,
-  a: (p: { href?: string; children?: ReactNode }) => <a href={p.href} target={p.href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">{p.children}</a>,
+  img: (p: { src?: string | undefined; alt?: string | undefined }) => <img src={p.src} alt={p.alt ?? ""} loading="lazy" />,
+  a: (p: { href?: string | undefined; children?: ReactNode }) => <a href={p.href} target={p.href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">{p.children}</a>,
 };
 
 function splitForAd(md: string) {
@@ -214,7 +214,7 @@ function Comments({ articleId, comments }: { articleId: string; comments: { id: 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const parsed = commentSchema.safeParse({ author_name: name, body });
-    if (!parsed.success) return setMsg({ ok: false, text: parsed.error.issues[0].message });
+    if (!parsed.success) return setMsg({ ok: false, text: parsed.error.issues[0]?.message ?? "Invalid input" });
     setBusy(true);
     const { error } = await supabase.from("comments").insert({ article_id: articleId, author_name: parsed.data.author_name, body: parsed.data.body });
     setBusy(false);
