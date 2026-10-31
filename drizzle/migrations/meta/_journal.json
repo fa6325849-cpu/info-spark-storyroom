@@ -8,6 +8,13 @@
       "when": 1793432472981,
       "tag": "0000_news_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793432565194,
+      "tag": "0001_seed_demo_content",
+      "breakpoints": true
     }
   ]
 }
