@@ -99,7 +99,7 @@ export const getCategoryPage = createServerFn({ method: "GET" })
   });
 
 export const searchArticles = createServerFn({ method: "GET" })
-  .inputValidator((d: { q: string; category?: string; page: number }) => d)
+  .inputValidator((d: { q: string; category?: string | undefined; page: number }) => d)
   .handler(async ({ data }) => {
     const sb = publicClient();
     const q = data.q.trim().slice(0, 100).replace(/[%,()*]/g, " ");

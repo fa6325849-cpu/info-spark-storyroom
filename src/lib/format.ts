@@ -42,7 +42,7 @@ export function extractHeadings(md: string) {
     .split("\n")
     .map((l) => /^(#{2,3})\s+(.+)$/.exec(l.trim()))
     .filter((m): m is RegExpExecArray => !!m)
-    .map((m) => ({ level: m[1].length, text: m[2].replace(/[*_`]/g, ""), id: headingId(m[2].replace(/[*_`]/g, "")) }));
+    .map((m) => ({ level: m[1]!.length, text: m[2]!.replace(/[*_`]/g, ""), id: headingId(m[2]!.replace(/[*_`]/g, "")) }));
 }
 
 export function imageUrl(src: string | null | undefined, w = 800) {
